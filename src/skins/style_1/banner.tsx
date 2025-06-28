@@ -80,11 +80,11 @@ const TeamLogo = styled.div`
   width: 170px;
   height: 190px;
   background: #fff2;
-  border-radius: 16px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 `;
 
 const TeamName = styled.div`
@@ -146,7 +146,7 @@ const Banner: React.FC = () => {
         <SubTitle>СК ТУЛИЦА</SubTitle>
         <TeamsBlock>
           <Team>
-            <TeamLogo>ЛОГО</TeamLogo>
+            <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'cover'}} /></TeamLogo>
             <TeamName>КОМАНДА</TeamName>
           </Team>
           <CrossWrap>
@@ -156,7 +156,7 @@ const Banner: React.FC = () => {
             </svg>
           </CrossWrap>
           <Team>
-            <TeamLogo>ЛОГО</TeamLogo>
+            <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'cover'}} /></TeamLogo>
             <TeamName>КОМАНДА</TeamName>
           </Team>
         </TeamsBlock>

@@ -77,6 +77,7 @@ const Logo = styled.div`
   font-family: 'Supermolot-Regular', Arial, sans-serif;
   font-size: 18px;
   color: #fff;
+  overflow: hidden;
 `;
 
 const PlayersContainer = styled.div`
@@ -139,6 +140,7 @@ const PlayerPhoto = styled.div`
   justify-content: center;
   font-size: 12px;
   color: #222;
+  overflow: hidden;
 `;
 
 const BottomRow = styled.div`
@@ -190,7 +192,7 @@ const Roster: React.FC = () => {
       <Wrapper>
         <RosterBadge>СОСТАВ</RosterBadge>
         <TeamName>КОМАНДА</TeamName>
-        <Logo>ЛОГО</Logo>
+        <Logo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></Logo>
         <PlayersContainer>
           {[0,1,2,3,4,5].map((row) => (
             <PlayerRow key={row}>
@@ -198,7 +200,7 @@ const Roster: React.FC = () => {
                 <Player key={col}>
                   <PlayerNumber>№</PlayerNumber>
                   <PlayerName>ИГРОК</PlayerName>
-                  <PlayerPhoto>ФОТО</PlayerPhoto>
+                  <PlayerPhoto><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'cover'}} /></PlayerPhoto>
                 </Player>
               ))}
             </PlayerRow>

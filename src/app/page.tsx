@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { PersonKind, TableKind, person_kinds } from '@/models';
 import Banner from '../skins/style_1/banner';
 import Roster from '../skins/style_1/roster';
+import Scoreboard from '../skins/style_1/scoreboard';
 
 const styles = ['style_1', 'style_2'];
 
@@ -20,7 +21,7 @@ interface Skin {
   Replace: React.ComponentType<{ show: boolean }>;
 }
 
-const tableKinds = ['little', 'big', 'mid', 'home-roster', 'away-roster', 'person', 'replace', 'off', 'roster'];
+const tableKinds = ['little', 'big', 'mid', 'home-roster', 'away-roster', 'person', 'replace', 'off', 'roster', 'scoreboard'];
 
 export default function App() {
   const [style, set_style] = useState<string>('style_1');
@@ -59,6 +60,7 @@ export default function App() {
       <AnimatePresence>
         {table_kind === 'mid' && (
           <motion.div
+            key={table_kind}
             initial={{ y: -500, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 500, opacity: 0 }}
@@ -83,6 +85,7 @@ export default function App() {
         )}
         {table_kind === 'roster' && (
           <motion.div
+            key={table_kind}
             initial={{ y: -500, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 500, opacity: 0 }}
@@ -105,15 +108,40 @@ export default function App() {
             </div>
           </motion.div>
         )}
+        {table_kind === 'scoreboard' && (
+          <motion.div
+            key={table_kind}
+            initial={{ y: -500, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 500, opacity: 0 }}
+            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10,
+              pointerEvents: 'none',
+            }}
+          >
+            <div style={{ pointerEvents: 'auto' }}>
+              <Scoreboard />
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
-      {table_kind !== 'mid' && table_kind !== 'roster' && <>
-      <skin.Big show={table_kind === 'big'} />
-      <skin.Little show={table_kind === 'little'} />
-      <skin.Mid show={table_kind === 'mid'} />
-      <skin.HomeRoster show={table_kind === 'home-roster'} />
-      <skin.AwayRoster show={table_kind === 'away-roster'} />
-      <skin.Person kind={person_kind} show={table_kind === 'person'} /> 
-      <skin.Replace show={table_kind === 'replace'} />
+      {table_kind !== 'mid' && table_kind !== 'roster' && table_kind !== 'scoreboard' && <>
+        <skin.Big show={table_kind === 'big'} />
+        <skin.Little show={table_kind === 'little'} />
+        <skin.Mid show={table_kind === 'mid'} />
+        <skin.HomeRoster show={table_kind === 'home-roster'} />
+        <skin.AwayRoster show={table_kind === 'away-roster'} />
+        <skin.Person kind={person_kind} show={table_kind === 'person'} /> 
+        <skin.Replace show={table_kind === 'replace'} />
       </>}
       <Tools>
         <Select value={style} onChange={(e) => set_style(e.target.value)}>
@@ -125,6 +153,7 @@ export default function App() {
         <Button onClick={() => set_table_kind('big')}>Big</Button>
         <Button onClick={() => set_table_kind('mid')}>Mid</Button>
         <Button onClick={() => set_table_kind('roster')}>Roster</Button>
+        <Button onClick={() => set_table_kind('scoreboard')}>Scoreboard</Button>
         <Button onClick={() => set_table_kind('home-roster')}>Home Roster</Button>
         <Button onClick={() => set_table_kind('away-roster')}>Away Roster</Button>
         <Select value={person_kind} onChange={(e) => set_person_kind(e.target.value as PersonKind)}>
