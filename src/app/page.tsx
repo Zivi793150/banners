@@ -13,39 +13,27 @@ import ScoreboardTop from '../skins/style_1/scoreboard-top';
 const styles = ['style_1', 'style_2'];
 
 interface Skin {
-  Little: React.ComponentType<{ show: boolean }>;
-  Big: React.ComponentType<{ show: boolean }>;
   Mid: React.ComponentType<{ show: boolean }>;
-  HomeRoster: React.ComponentType<{ show: boolean }>;
-  AwayRoster: React.ComponentType<{ show: boolean }>;
   Person: React.ComponentType<{ kind: PersonKind, show: boolean }>;
   Replace: React.ComponentType<{ show: boolean }>;
 }
 
-const tableKinds = ['little', 'big', 'mid', 'home-roster', 'away-roster', 'person', 'replace', 'off', 'roster', 'scoreboard', 'scoreboard-top'];
+const tableKinds = ['mid', 'roster', 'person', 'replace', 'off', 'scoreboard', 'scoreboard-top'];
 
 export default function App() {
   const [style, set_style] = useState<string>('style_1');
   const [skin, set_skin] = useState<Skin | null>(null);
-  const [table_kind, set_table_kind] = useState<TableKind>('little');
+  const [table_kind, set_table_kind] = useState<TableKind>('mid');
   const [person_kind, set_person_kind] = useState<PersonKind>('goal');
   
   useEffect(() => {
     if (!style) return;
     (async () => {
-      const Little = (await import(`@/skins/${style}/little`)).Little;
-      const Big = (await import(`@/skins/${style}/big`)).Big;
       const Mid = (await import(`@/skins/${style}/mid`)).Mid;
-      const HomeRoster = (await import(`@/skins/${style}/home-roster`)).HomeRoster;
-      const AwayRoster = (await import(`@/skins/${style}/away-roster`)).AwayRoster;
       const Person = (await import(`@/skins/${style}/person`)).Person;
       const Replace = (await import(`@/skins/${style}/replace`)).Replace;
       set_skin({
-        Little,
-        Big,
         Mid,
-        HomeRoster,
-        AwayRoster,
         Person,
         Replace
       });
@@ -118,12 +106,10 @@ export default function App() {
             transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
             style={{
               position: 'fixed',
-              top: 0,
               left: 0,
+              bottom: 32,
               width: '100vw',
-              height: '100vh',
               display: 'flex',
-              alignItems: 'center',
               justifyContent: 'center',
               zIndex: 10,
               pointerEvents: 'none',
@@ -143,13 +129,10 @@ export default function App() {
             transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
             style={{
               position: 'fixed',
-              top: 0,
               left: 0,
-              width: '100vw',
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              top: 32,
+              width: 'auto',
+              display: 'block',
               zIndex: 10,
               pointerEvents: 'none',
             }}
@@ -159,14 +142,30 @@ export default function App() {
             </div>
           </motion.div>
         )}
+        {table_kind === 'person' && (
+          <motion.div
+            key={table_kind}
+            initial={{ x: -500, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -500, opacity: 0 }}
+            transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: 'fixed',
+              left: 60,
+              bottom: 80,
+              zIndex: 20,
+              pointerEvents: 'none',
+            }}
+          >
+            <div style={{ pointerEvents: 'auto' }}>
+              <skin.Person kind={person_kind} show={table_kind === 'person'} />
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
       {table_kind !== 'mid' && table_kind !== 'roster' && table_kind !== 'scoreboard' && table_kind !== 'scoreboard-top' && <>
-      <skin.Big show={table_kind === 'big'} />
-      <skin.Little show={table_kind === 'little'} />
       <skin.Mid show={table_kind === 'mid'} />
-      <skin.HomeRoster show={table_kind === 'home-roster'} />
-      <skin.AwayRoster show={table_kind === 'away-roster'} />
-      <skin.Person kind={person_kind} show={table_kind === 'person'} /> 
+      {/* <skin.Person kind={person_kind} show={table_kind === 'person'} /> */}
       <skin.Replace show={table_kind === 'replace'} />
       </>}
       <Tools>
@@ -175,14 +174,10 @@ export default function App() {
             <option key={style} value={style}>{style}</option>
           ))}
         </Select>
-        <Button onClick={() => set_table_kind('little')}>Little</Button>
-        <Button onClick={() => set_table_kind('big')}>Big</Button>
         <Button onClick={() => set_table_kind('mid')}>Mid</Button>
         <Button onClick={() => set_table_kind('roster')}>Roster</Button>
         <Button onClick={() => set_table_kind('scoreboard')}>Scoreboard</Button>
         <Button onClick={() => set_table_kind('scoreboard-top')}>Scoreboard Top</Button>
-        <Button onClick={() => set_table_kind('home-roster')}>Home Roster</Button>
-        <Button onClick={() => set_table_kind('away-roster')}>Away Roster</Button>
         <Select value={person_kind} onChange={(e) => set_person_kind(e.target.value as PersonKind)}>
           {person_kinds.map((kind) => (
             <option key={kind} value={kind}>{kind}</option>

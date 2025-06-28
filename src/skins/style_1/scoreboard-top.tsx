@@ -29,34 +29,34 @@ const FontStyles = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  width: 900px;
-  height: 72px;
+  width: 600px;
+  height: 56px;
   background: #F7F7F7;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
-  gap: 32px;
+  gap: 20px;
 `;
 
 const SideBar = styled.div<{ color: string }>`
-  width: 12px;
-  height: 64px;
+  width: 8px;
+  height: 44px;
   background: ${({ color }) => color};
 `;
 
 const TeamBlock = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 140px;
-  height: 72px;
+  gap: 6px;
+  min-width: 90px;
+  height: 56px;
 `;
 
 const TeamLogo = styled.div`
-  width: 56px;
-  height: 56px;
+  width: 36px;
+  height: 36px;
   background: none;
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@ const TeamLogo = styled.div`
 
 const TeamName = styled.div`
   font-family: 'Supermolot-ExtraBold', Arial, sans-serif;
-  font-size: 48px;
+  font-size: 28px;
   color: #001134;
   letter-spacing: 0.5px;
 `;
@@ -79,31 +79,31 @@ const CenterBlock = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  min-width: 120px;
-  gap: 4px;
+  width: 80px;
+  min-width: 80px;
+  gap: 2px;
 `;
 
 const Fouls = styled.div`
-  width: 120px;
-  height: 24px;
+  width: 80px;
+  height: 16px;
   background: #001134;
   color: #fff;
   font-family: 'Supermolot-DemiBold', Arial, sans-serif;
-  font-size: 18px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
   letter-spacing: 0.2px;
 `;
 
 const Score = styled.div`
-  width: 120px;
-  height: 56px;
+  width: 80px;
+  height: 32px;
   background: linear-gradient(97.14deg, #014069 1.29%, #027ECF 118.37%);
   font-family: 'Supermolot-ExtraBold', Arial, sans-serif;
-  font-size: 40px;
+  font-size: 20px;
   color: #fff;
   display: flex;
   align-items: center;
@@ -112,21 +112,21 @@ const Score = styled.div`
 `;
 
 const BottomBlock = styled.div`
-  width: 120px;
-  height: 24px;
+  width: 80px;
+  height: 16px;
   background: #001134;
   color: #fff;
   font-family: 'Supermolot-DemiBold', Arial, sans-serif;
-  font-size: 18px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 6px;
 `;
 
 const Divider = styled.div`
-  width: 2px;
-  height: 16px;
+  width: 1px;
+  height: 10px;
   background: #fff;
   border-radius: 1px;
   opacity: 0.8;
