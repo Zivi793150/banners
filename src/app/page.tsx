@@ -18,6 +18,8 @@ interface Skin {
   Replace: React.ComponentType<{ show: boolean }>;
 }
 
+const tableKinds = ['mid', 'roster', 'person', 'replace', 'off', 'scoreboard', 'scoreboard-top'];
+
 export default function App() {
   const [style, set_style] = useState<string>('style_1');
   const [skin, set_skin] = useState<Skin | null>(null);
@@ -161,11 +163,9 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-      {table_kind !== 'mid' && table_kind !== 'roster' && table_kind !== 'scoreboard' && table_kind !== 'scoreboard-top' && <>
-      <skin.Mid show={table_kind === 'mid'} />
+      {/* <skin.Mid show={table_kind === 'mid'} /> */}
       {/* <skin.Person kind={person_kind} show={table_kind === 'person'} /> */}
       <skin.Replace show={table_kind === 'replace'} />
-      </>}
       <Tools>
         <Select value={style} onChange={(e) => set_style(e.target.value)}>
           {styles.map((style) => (
