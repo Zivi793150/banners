@@ -173,7 +173,7 @@ export default function App() {
           ))}
         </Select>
         <Button onClick={() => set_table_kind('mid')}>Mid</Button>
-        <Button onClick={() => set_table_kind('roster')}>Roster</Button>
+        <Button onClick={() => set_table_kind('home-roster')}>Roster</Button>
         <Button onClick={() => set_table_kind('scoreboard')}>Scoreboard</Button>
         <Button onClick={() => set_table_kind('scoreboard-top')}>Scoreboard Top</Button>
         <Select value={person_kind} onChange={(e) => set_person_kind(e.target.value as PersonKind)}>
