@@ -18,8 +18,6 @@ interface Skin {
   Replace: React.ComponentType<{ show: boolean }>;
 }
 
-const tableKinds = ['mid', 'roster', 'person', 'replace', 'off', 'scoreboard', 'scoreboard-top'];
-
 export default function App() {
   const [style, set_style] = useState<string>('style_1');
   const [skin, set_skin] = useState<Skin | null>(null);
