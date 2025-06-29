@@ -31,7 +31,7 @@ export const table_kind_options: TableKindOption[] = [
   { label: 'Выкл', value: 'off' },
 ];
 
-export type TableKind = 'little' | 'big' | 'mid' | 'home-roster' | 'away-roster' | 'person' | 'replace' | 'off';
+export type TableKind = 'little' | 'big' | 'mid' | 'home-roster' | 'away-roster' | 'person' | 'replace' | 'off' | 'scoreboard' | 'scoreboard-top';
 
 export interface Table {
   kind: TableKind;
@@ -111,7 +111,7 @@ export interface ReplacementMessage {
   replacement: Replacement;
 }
 
-export const table_kinds = ['big', 'little', 'mid', 'home-roster', 'away-roster', 'person', 'replace', 'off'];
+export const table_kinds = ['big', 'little', 'mid', 'home-roster', 'away-roster', 'person', 'replace', 'off', 'scoreboard', 'scoreboard-top'];
 
 export const person_kinds = ['goal', 'yellow', 'red', 'judge', 'coach'] as const;
 export type PersonKind = (typeof person_kinds)[number];
