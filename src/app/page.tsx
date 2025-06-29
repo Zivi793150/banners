@@ -72,7 +72,7 @@ export default function App() {
             </div>
           </motion.div>
         )}
-        {table_kind === 'roster' && (
+        {(table_kind === 'home-roster' || table_kind === 'away-roster') && (
           <motion.div
             key={table_kind}
             initial={{ y: -500, opacity: 0 }}
