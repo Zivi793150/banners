@@ -65,19 +65,22 @@ const TeamName = styled.div`
 
 const Logo = styled.div`
   position: absolute;
+  width: 80px;
+  height: 80px;
   top: 40px;
   right: 40px;
-  width: 80px;
-  height: 100px;
-  background: #fff2;
-  border-radius: 12px;
+  background: #FFFFFF;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Supermolot-Regular', Arial, sans-serif;
-  font-size: 18px;
-  color: #fff;
   overflow: hidden;
+  
+  img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
 `;
 
 const PlayersContainer = styled.div`

@@ -101,7 +101,7 @@ const Fouls = styled.div`
 const Score = styled.div`
   width: 80px;
   height: 32px;
-  background: linear-gradient(97.14deg, #014069 1.29%, #027ECF 118.37%);
+  background: linear-gradient(97.14deg, #025288 1.29%, #0369A8 118.37%);
   font-family: 'Supermolot-ExtraBold', Arial, sans-serif;
   font-size: 20px;
   color: #fff;

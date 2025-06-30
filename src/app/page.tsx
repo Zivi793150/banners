@@ -158,7 +158,7 @@ export default function App() {
             }}
           >
             <div style={{ pointerEvents: 'auto' }}>
-              <skin.Person kind={person_kind} show={table_kind === 'person'} />
+      <skin.Person kind={person_kind} show={table_kind === 'person'} /> 
             </div>
           </motion.div>
         )}
@@ -174,8 +174,8 @@ export default function App() {
         </Select>
         <Button onClick={() => set_table_kind('mid')}>Mid</Button>
         <Button onClick={() => set_table_kind('home-roster')}>Roster</Button>
-        <Button onClick={() => set_table_kind('scoreboard')}>Scoreboard</Button>
-        <Button onClick={() => set_table_kind('scoreboard-top')}>Scoreboard Top</Button>
+        <Button onClick={() => set_table_kind('scoreboard')}>big</Button>
+        <Button onClick={() => set_table_kind('scoreboard-top')}>little</Button>
         <Select value={person_kind} onChange={(e) => set_person_kind(e.target.value as PersonKind)}>
           {person_kinds.map((kind) => (
             <option key={kind} value={kind}>{kind}</option>
