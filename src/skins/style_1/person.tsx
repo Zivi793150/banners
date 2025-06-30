@@ -57,7 +57,6 @@ const PlayerWrapper = styled.div`
 
 const SideBar = styled.div<{ color: string }>`
   width: 6px;
-  height: 100%;
   background: ${({ color }) => color};
   border-radius: 2px 0 0 2px;
 `;

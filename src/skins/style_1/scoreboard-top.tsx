@@ -31,7 +31,7 @@ const FontStyles = createGlobalStyle`
 const Wrapper = styled.div`
   width: 600px;
   height: 56px;
-  background: #F7F7F7;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,6 +52,7 @@ const TeamBlock = styled.div`
   gap: 6px;
   min-width: 90px;
   height: 56px;
+  background: none;
 `;
 
 const TeamLogo = styled.div`
