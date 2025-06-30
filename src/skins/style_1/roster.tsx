@@ -188,13 +188,13 @@ const StaffName = styled.span`
   vertical-align: middle;
 `;
 
-const Roster: React.FC = () => {
+const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {
   return (
     <>
       <FontStyles />
       <Wrapper>
         <RosterBadge>СОСТАВ</RosterBadge>
-        <TeamName>КОМАНДА</TeamName>
+        <TeamName>{type === 'home' ? 'КОМАНДА' : 'КОМАНДА ГОСТЕЙ'}</TeamName>
         <Logo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></Logo>
         <PlayersContainer>
           {[0,1,2,3,4,5].map((row) => (

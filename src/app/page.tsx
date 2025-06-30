@@ -93,7 +93,7 @@ export default function App() {
             }}
           >
             <div style={{ pointerEvents: 'auto' }}>
-              <Roster />
+              <Roster type={table_kind === 'home-roster' ? 'home' : 'away'} />
             </div>
           </motion.div>
         )}
@@ -173,7 +173,8 @@ export default function App() {
           ))}
         </Select>
         <Button onClick={() => set_table_kind('mid')}>Mid</Button>
-        <Button onClick={() => set_table_kind('home-roster')}>Roster</Button>
+        <Button onClick={() => set_table_kind('home-roster')}>Home roster</Button>
+        <Button onClick={() => set_table_kind('away-roster')}>Away Roster</Button>
         <Button onClick={() => set_table_kind('scoreboard')}>big</Button>
         <Button onClick={() => set_table_kind('scoreboard-top')}>little</Button>
         <Select value={person_kind} onChange={(e) => set_person_kind(e.target.value as PersonKind)}>
