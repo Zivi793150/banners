@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const FontStyles = createGlobalStyle`
   @font-face {
@@ -149,16 +150,91 @@ const DateBlock = styled.div`
   font-size: 20px;
 `;
 
+// Компонент для анимированных звёзд
+const StarField: React.FC = () => {
+  // Одинаковая скорость для всех звёзд
+  const duration = 10; // секунда на полный цикл (быстро)
+  const rotateDuration = 18; // медленное вращение (секунд)
+  const stars = Array.from({ length: 14 }, (_, i) => {
+    // Случайные параметры для каждой звезды
+    const size = 60 + Math.random() * 80; // размер
+    const top = Math.random() * 90; // %
+    const left = Math.random() * 90; // %
+    const opacity = 0.12 + Math.random() * 0.18;
+    // Очень хаотичное движение
+    const xMove = (Math.random() - 0.5) * 600; // px (ещё больше амплитуда)
+    const yMove = (Math.random() - 0.5) * 600; // px (ещё больше амплитуда)
+    // Вращение всегда по часовой или против (рандом)
+    const rotateTo = Math.random() > 0.5 ? 360 : -360;
+    return (
+      <motion.div
+        key={i}
+        style={{
+          position: 'absolute',
+          top: `${top}%`,
+          left: `${left}%`,
+          width: size,
+          height: size,
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+        initial={{ x: 0, y: 0 }}
+        animate={{ x: [0, xMove, 0], y: [0, yMove, 0] }}
+        transition={{
+          duration,
+          repeat: Infinity,
+          repeatType: 'loop' as const,
+          ease: 'linear',
+        }}
+      >
+        <motion.img
+          src="/star.png"
+          alt="star"
+          style={{ width: '100%', height: '100%', opacity }}
+          initial={{ rotate: 0 }}
+          animate={{ rotate: rotateTo }}
+          transition={{
+            repeat: Infinity,
+            repeatType: 'loop' as const,
+            ease: 'linear',
+            duration: rotateDuration,
+          }}
+        />
+      </motion.div>
+    );
+  });
+  return <>{stars}</>;
+};
+
 const Banner: React.FC = () => {
   return (
     <>
       <FontStyles />
       <BannerWrapper>
+        {/* Звёзды на фоне */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden' }}>
+          <StarField />
+        </div>
         <Title>КУБОК 3-ЕЙ ЛИГИ</Title>
         <SubTitle>СК ТУЛИЦА</SubTitle>
         <TeamsBlock>
           <Team>
-            <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'cover'}} /></TeamLogo>
+            <TeamLogo>
+              <motion.img
+                src="/team.png"
+                alt="logo"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.18, 1] }}
+                transition={{
+                  duration: 3.8,
+                  repeat: Infinity,
+                  repeatType: 'loop' as const,
+                  ease: 'easeInOut',
+                  delay: 0.2,
+                }}
+              />
+            </TeamLogo>
             <TeamName>КОМАНДА</TeamName>
           </Team>
           <CrossWrap>
@@ -168,7 +244,22 @@ const Banner: React.FC = () => {
             </svg>
           </CrossWrap>
           <Team>
-            <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'cover'}} /></TeamLogo>
+            <TeamLogo>
+              <motion.img
+                src="/team.png"
+                alt="logo"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.13, 1] }}
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  repeatType: 'loop' as const,
+                  ease: 'easeInOut',
+                  delay: 1.1,
+                }}
+              />
+            </TeamLogo>
             <TeamName>КОМАНДА</TeamName>
           </Team>
         </TeamsBlock>
