@@ -29,38 +29,33 @@ const Wrapper = styled.div`
 
 const RosterBadge = styled.div`
   position: absolute;
-  width: 174px;
-  height: 52px;
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, #014069 0%, #027ECF 100%);
+  padding: 8px 24px;
+  background: #0066B1;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: 'Supermolot-Bold', Arial, sans-serif;
-  font-weight: 800;
-  font-size: 32px;
+  font-size: 24px;
   color: #fff;
-  letter-spacing: -2%;
+  text-align: center;
+  white-space: nowrap;
 `;
 
 const TeamName = styled.div`
   position: absolute;
-  width: 389px;
-  height: 28px;
-  top: 116px;
+  width: 100%;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: 'Supermolot-Bold', Arial, sans-serif;
-  font-weight: 800;
-  font-size: 40px;
+  font-size: 48px;
   color: #fff;
-  letter-spacing: -2%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 120px;
 `;
 
 const Logo = styled.div`
@@ -128,10 +123,16 @@ const PlayerNumber = styled.div`
 
 const PlayerName = styled.div`
   flex: 1;
-  padding-left: 8px;
+  padding: 0 8px;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
   font-size: 18px;
   color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  display: flex;
+  align-items: center;
 `;
 
 const PlayerPhoto = styled.div`
@@ -169,6 +170,7 @@ const StaffBlock = styled.div`
   font-size: 20px;
   color: #fff;
   padding: 0 24px;
+  overflow: hidden;
 `;
 
 const StaffLabel = styled.span`
@@ -176,16 +178,17 @@ const StaffLabel = styled.span`
   font-size: 20px;
   color: #fff;
   margin-right: 12px;
-  display: inline-block;
-  vertical-align: middle;
+  flex-shrink: 0;
 `;
 
 const StaffName = styled.span`
   font-family: 'Supermolot-Regular', Arial, sans-serif;
   font-size: 20px;
   color: #fff;
-  display: inline-block;
-  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
 `;
 
 const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {

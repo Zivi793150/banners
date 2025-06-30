@@ -97,6 +97,9 @@ const PlayerName = styled.div`
   font-size: 24px;
   color: #fff;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 `;
 
 const CardIcon = styled.div<{ color: string }>`
@@ -112,4 +115,8 @@ const TeamName = styled.div`
   font-size: 16px;
   color: #BFC9D9;
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 `;

@@ -38,7 +38,11 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 72px;
   color: #fff;
-  letter-spacing: -2%;
+  padding: 0 40px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const SubTitle = styled.div`
@@ -48,12 +52,14 @@ const SubTitle = styled.div`
   align-items: center;
   justify-content: center;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
-  font-weight: normal;
   font-size: 32px;
   line-height: 32px;
-  letter-spacing: -2%;
   color: #fff;
   text-align: center;
+  padding: 0 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const TeamsBlock = styled.div`
@@ -93,6 +99,12 @@ const TeamName = styled.div`
   font-size: 36px;
   color: #fff;
   margin-top: 8px;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
 `;
 
 const CrossWrap = styled.div`

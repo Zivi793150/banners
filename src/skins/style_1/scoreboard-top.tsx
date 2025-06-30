@@ -72,6 +72,11 @@ const TeamName = styled.div`
   font-size: 28px;
   color: #001134;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  text-align: center;
 `;
 
 const CenterBlock = styled.div`
@@ -96,6 +101,9 @@ const Fouls = styled.div`
   justify-content: center;
   gap: 6px;
   letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Score = styled.div`
@@ -109,6 +117,7 @@ const Score = styled.div`
   align-items: center;
   justify-content: center;
   letter-spacing: 2px;
+  white-space: nowrap;
 `;
 
 const BottomBlock = styled.div`
@@ -122,6 +131,9 @@ const BottomBlock = styled.div`
   align-items: center;
   justify-content: center;
   gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Divider = styled.div`

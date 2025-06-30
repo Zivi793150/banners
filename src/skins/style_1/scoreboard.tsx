@@ -54,34 +54,42 @@ const TeamName = styled.div`
   color: #001134;
   display: flex;
   align-items: center;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 20px;
 `;
 
 const CenterBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-width: 160px;
-  height: 100px;
-  gap: 0;
+  width: 160px;
+`;
+
+const ScoreContainer = styled.div`
+  width: 160px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Score = styled.div`
-  width: 160px;
+  width: 100%;
   height: 100px;
   background: linear-gradient(97.14deg, #014069 1.29%, #027ECF 118.37%);
   font-family: 'Supermolot-Bold', Arial, sans-serif;
   font-size: 48px;
   color: #fff;
-  letter-spacing: -2%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 `;
 
 const SubText = styled.div`
-  width: 160px;
+  width: 100%;
   height: 44px;
   background: #001134;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
@@ -91,7 +99,9 @@ const SubText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Scoreboard: React.FC = () => {
@@ -103,10 +113,12 @@ const Scoreboard: React.FC = () => {
           <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></TeamLogo>
           <TeamName>КОМАНДА</TeamName>
         </TeamBlock>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-          <CenterBlock><Score>2 - 0</Score></CenterBlock>
-          <SubText>ТЕКСТ</SubText>
-        </div>
+        <CenterBlock>
+          <ScoreContainer>
+            <Score>2 - 0</Score>
+            <SubText>ТЕКСТ</SubText>
+          </ScoreContainer>
+        </CenterBlock>
         <TeamBlock style={{ justifyContent: 'flex-end' }}>
           <TeamName>КОМАНДА</TeamName>
           <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></TeamLogo>
