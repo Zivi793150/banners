@@ -29,7 +29,7 @@ const FontStyles = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  width: 600px;
+  width: 520px;
   height: 56px;
   background: none;
   display: flex;
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   justify-content: center;
   margin: 0;
   position: relative;
-  gap: 20px;
+  gap: 0;
 `;
 
 const SideBar = styled.div<{ color: string }>`
@@ -49,15 +49,15 @@ const SideBar = styled.div<{ color: string }>`
 const TeamBlock = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  min-width: 90px;
+  gap: 2px;
+  min-width: 60px;
   height: 56px;
   background: none;
 `;
 
 const TeamLogo = styled.div`
-  width: 36px;
-  height: 36px;
+  width: 52px;
+  height: 52px;
   background: none;
   display: flex;
   align-items: center;
@@ -155,7 +155,7 @@ const ScoreboardTop: React.FC = () => {
       <FontStyles />
       <Wrapper>
         <SideBar color="#E53935" />
-        <TeamBlock style={{ justifyContent: 'flex-start' }}>
+        <TeamBlock style={{ justifyContent: 'flex-start', marginRight: 32 }}>
           <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></TeamLogo>
           <TeamName>КОМ</TeamName>
         </TeamBlock>
@@ -172,7 +172,7 @@ const ScoreboardTop: React.FC = () => {
             <span>64:35</span>
           </BottomBlock>
         </CenterBlock>
-        <TeamBlock style={{ justifyContent: 'flex-end' }}>
+        <TeamBlock style={{ justifyContent: 'flex-end', marginLeft: 32 }}>
           <TeamName>ФЕЛ</TeamName>
           <TeamLogo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></TeamLogo>
         </TeamBlock>

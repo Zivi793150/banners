@@ -164,7 +164,7 @@ const StarSVG = ({ size = 120, color = '#fff', style = {} }) => (
 const STAR_SIZE = (80 + 60) * 2.5; // максимальный размер
 const STAR_SPEED = 70; // скорость движения увеличена
 const STAR_ROTATE_SPEED = 4; // скорость вращения увеличена
-const STAR_COUNT = 24;
+const STAR_COUNT = 18;
 const MAX_STAR_SIZE = STAR_SIZE;
 
 function getRandomStarDirection() {
