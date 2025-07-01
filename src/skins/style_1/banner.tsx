@@ -164,11 +164,59 @@ const StarSVG = ({ size = 120, color = '#fff', style = {} }) => (
 const STAR_SIZE = (80 + 60) * 2.5; // максимальный размер
 const STAR_SPEED = 70; // скорость движения увеличена
 const STAR_ROTATE_SPEED = 4; // скорость вращения увеличена
-const STAR_COUNT = 18;
+const STAR_COUNT = 16;
 const MAX_STAR_SIZE = STAR_SIZE;
 
 function getRandomStarDirection() {
   return Math.random() * 2 * Math.PI;
+}
+
+// Генерация массива звезд с минимальным перекрытием
+function generateNonOverlappingStars(count: number) {
+  const stars = [];
+  let attempts = 0;
+  while (stars.length < count && attempts < count * 20) {
+    attempts++;
+    const direction = getRandomStarDirection();
+    const size = STAR_SIZE;
+    const x = -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE);
+    const y = -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE);
+    // Проверяем, чтобы не было близко к другим звездам
+    let tooClose = false;
+    for (const s of stars) {
+      const dx = s.x - x;
+      const dy = s.y - y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < size * 1.1) { // 1.1 — небольшой запас
+        tooClose = true;
+        break;
+      }
+    }
+    if (!tooClose) {
+      stars.push({
+        size,
+        speed: STAR_SPEED,
+        rotateSpeed: STAR_ROTATE_SPEED,
+        direction,
+        angle: Math.random() * 360,
+        x,
+        y
+      });
+    }
+  }
+  // Если не удалось — просто добиваем случайными
+  while (stars.length < count) {
+    stars.push({
+      size: STAR_SIZE,
+      speed: STAR_SPEED,
+      rotateSpeed: STAR_ROTATE_SPEED,
+      direction: getRandomStarDirection(),
+      angle: Math.random() * 360,
+      x: -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE),
+      y: -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE)
+    });
+  }
+  return stars;
 }
 
 const CANVAS_WIDTH = 1400;
@@ -184,17 +232,7 @@ const StarsLayer = styled.div`
 
 const AnimatedStars: React.FC = () => {
   // Параметры звезд: одинаковые, кроме направления
-  const starsRef = useRef(
-    Array.from({ length: STAR_COUNT }, () => ({
-      size: STAR_SIZE,
-      speed: STAR_SPEED,
-      rotateSpeed: STAR_ROTATE_SPEED,
-      direction: getRandomStarDirection(),
-      angle: Math.random() * 360,
-      x: -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE),
-      y: -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE)
-    }))
-  );
+  const starsRef = useRef(generateNonOverlappingStars(STAR_COUNT));
   const stars = starsRef.current;
   // Для форсированного рендера через useReducer
   const [, forceUpdate] = React.useReducer(x => x + 1, 0);
