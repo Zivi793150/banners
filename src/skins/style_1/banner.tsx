@@ -164,7 +164,7 @@ const StarSVG = ({ size = 120, color = '#fff', style = {} }) => (
 const STAR_SIZE = (80 + 60) * 2.5; // максимальный размер
 const STAR_SPEED = 70; // скорость движения увеличена
 const STAR_ROTATE_SPEED = 4; // скорость вращения увеличена
-const STAR_COUNT = 12;
+const STAR_COUNT = 16;
 const MAX_STAR_SIZE = STAR_SIZE;
 
 function getRandomStarDirection() {
@@ -230,56 +230,112 @@ const StarsLayer = styled.div`
   pointer-events: none;
 `;
 
-const AnimatedStars: React.FC = () => {
-  // Параметры звезд: одинаковые, кроме направления
-  const starsRef = useRef(generateNonOverlappingStars(STAR_COUNT));
-  const stars = starsRef.current;
-  // Для форсированного рендера через useReducer
-  const [, forceUpdate] = React.useReducer(x => x + 1, 0);
-  const lastTime = useRef(performance.now());
+// Функция для отрисовки звезды на canvas
+function drawStar(ctx: CanvasRenderingContext2D, x: number, y: number, r: number, angle: number) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle * Math.PI / 180);
+  ctx.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const a = Math.PI / 5 * i;
+    const rad = i % 2 === 0 ? r : r * 0.4;
+    ctx.lineTo(Math.cos(a) * rad, Math.sin(a) * rad);
+  }
+  ctx.closePath();
+  ctx.globalAlpha = 0.15;
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
 
+const CanvasStars: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const STAR_COUNT = 12;
+  const STAR_SIZE = (80 + 60) * 2.5;
+  const STAR_SPEED = 70;
+  const STAR_ROTATE_SPEED = 4;
+  const CANVAS_WIDTH = 1400;
+  const CANVAS_HEIGHT = 800;
+  const MAX_STAR_SIZE = STAR_SIZE;
+  // Генерация начальных позиций без наложений
+  function generateStars() {
+    const stars: any[] = [];
+    let attempts = 0;
+    while (stars.length < STAR_COUNT && attempts < STAR_COUNT * 30) {
+      attempts++;
+      const angle = Math.random() * 360;
+      const direction = Math.random() * 2 * Math.PI;
+      const x = -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE);
+      const y = -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE);
+      let tooClose = false;
+      for (const s of stars) {
+        const dx = s.x - x;
+        const dy = s.y - y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < STAR_SIZE * 1.1) {
+          tooClose = true;
+          break;
+        }
+      }
+      if (!tooClose) {
+        stars.push({ x, y, angle, direction });
+      }
+    }
+    // Если не удалось — добиваем случайными
+    while (stars.length < STAR_COUNT) {
+      stars.push({
+        x: -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE),
+        y: -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE),
+        angle: Math.random() * 360,
+        direction: Math.random() * 2 * Math.PI
+      });
+    }
+    return stars;
+  }
+  // Состояние звезд (позиции, углы, направления)
+  const starsRef = useRef<any[]>(generateStars());
   useEffect(() => {
-    let frame = 0;
+    let running = true;
+    const stars = starsRef.current;
+    const ctx = canvasRef.current?.getContext('2d');
     function animate() {
-      const now = performance.now();
-      let dt = (now - lastTime.current) / 1000;
-      lastTime.current = now;
-      if (dt > 0.02) dt = 0.02;
+      if (!ctx) return;
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      // Движение и вращение
       for (let i = 0; i < stars.length; i++) {
-        const s = stars[i];
-        s.x += Math.cos(s.direction) * s.speed * dt;
-        s.y += Math.sin(s.direction) * s.speed * dt;
-        s.angle += s.rotateSpeed * dt;
+        let s = stars[i];
+        // Избегание наложений
+        for (let j = 0; j < stars.length; j++) {
+          if (i === j) continue;
+          const s2 = stars[j];
+          let dx = s2.x - s.x;
+          let dy = s2.y - s.y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < STAR_SIZE * 1.05) {
+            // Немного корректируем направление, чтобы разъехались
+            const avoidAngle = Math.atan2(dy, dx) + Math.PI;
+            s.direction += (avoidAngle - s.direction) * 0.01;
+          }
+        }
+        s.x += Math.cos(s.direction) * STAR_SPEED / 60;
+        s.y += Math.sin(s.direction) * STAR_SPEED / 60;
+        s.angle += STAR_ROTATE_SPEED / 60;
+        // wrap-around
         const dx = Math.cos(s.direction);
         const dy = Math.sin(s.direction);
-        if (dx > 0 && s.x - s.size / 2 > CANVAS_WIDTH + MAX_STAR_SIZE) s.x = -MAX_STAR_SIZE;
-        if (dx < 0 && s.x + s.size / 2 < -MAX_STAR_SIZE) s.x = CANVAS_WIDTH + MAX_STAR_SIZE;
-        if (dy > 0 && s.y - s.size / 2 > CANVAS_HEIGHT + MAX_STAR_SIZE) s.y = -MAX_STAR_SIZE;
-        if (dy < 0 && s.y + s.size / 2 < -MAX_STAR_SIZE) s.y = CANVAS_HEIGHT + MAX_STAR_SIZE;
+        if (dx > 0 && s.x - STAR_SIZE / 2 > CANVAS_WIDTH + MAX_STAR_SIZE) s.x = -MAX_STAR_SIZE;
+        if (dx < 0 && s.x + STAR_SIZE / 2 < -MAX_STAR_SIZE) s.x = CANVAS_WIDTH + MAX_STAR_SIZE;
+        if (dy > 0 && s.y - STAR_SIZE / 2 > CANVAS_HEIGHT + MAX_STAR_SIZE) s.y = -MAX_STAR_SIZE;
+        if (dy < 0 && s.y + STAR_SIZE / 2 < -MAX_STAR_SIZE) s.y = CANVAS_HEIGHT + MAX_STAR_SIZE;
+        drawStar(ctx, s.x, s.y, STAR_SIZE / 2, s.angle);
       }
-      forceUpdate(); // форсируем рендер
-      frame = requestAnimationFrame(animate);
+      if (running) requestAnimationFrame(animate);
     }
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [stars]);
-
-  return (
-    <StarsLayer>
-      {stars.map((s, i) => (
-        <StarSVG
-          key={i}
-          size={s.size}
-          style={{
-            position: 'absolute',
-            left: s.x,
-            top: s.y,
-            transform: `rotate(${s.angle}deg)`
-          }}
-        />
-      ))}
-    </StarsLayer>
-  );
+    animate();
+    return () => { running = false; };
+  }, []);
+  return <canvas ref={canvasRef} width={1400} height={800} style={{position:'absolute', left:0, top:0, width:'100%', height:'100%', zIndex:0, pointerEvents:'none'}} />;
 };
 
 // Анимация логотипов (масштабирование в рассинхроне)
@@ -320,7 +376,7 @@ const Banner: React.FC = () => {
     <>
       <FontStyles />
       <BannerWrapper>
-        <AnimatedStars />
+        <CanvasStars />
         <Title>КУБОК 3-ЕЙ ЛИГИ</Title>
         <SubTitle>СК ТУЛИЦА</SubTitle>
         <TeamsBlock>
