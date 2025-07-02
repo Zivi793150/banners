@@ -161,7 +161,7 @@ const StarSVG = ({ size = 120, color = '#fff', style = {} }) => (
 );
 
 // Одинаковые параметры для всех звезд
-const STAR_SIZE = (80 + 60) * 2.5; // максимальный размер
+const STAR_SIZE = (80 + 60) * 1.8;
 const STAR_SPEED = 70; // скорость движения увеличена
 const STAR_ROTATE_SPEED = 4; // скорость вращения увеличена
 const STAR_COUNT = 16;
@@ -252,7 +252,7 @@ function drawStar(ctx: CanvasRenderingContext2D, x: number, y: number, r: number
 const CanvasStars: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const STAR_COUNT = 12;
-  const STAR_SIZE = (80 + 60) * 2.5;
+  const STAR_SIZE = (80 + 60) * 1.8;
   const STAR_SPEED = 70;
   const STAR_ROTATE_SPEED = 4;
   const CANVAS_WIDTH = 1400;
@@ -266,6 +266,8 @@ const CanvasStars: React.FC = () => {
       attempts++;
       const angle = Math.random() * 360;
       const direction = Math.random() * 2 * Math.PI;
+      const speed = 60 + Math.random() * 20; // 60-80
+      const rotateSpeed = 3 + Math.random() * 2; // 3-5
       const x = -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE);
       const y = -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE);
       let tooClose = false;
@@ -279,7 +281,7 @@ const CanvasStars: React.FC = () => {
         }
       }
       if (!tooClose) {
-        stars.push({ x, y, angle, direction });
+        stars.push({ x, y, angle, direction, speed, rotateSpeed });
       }
     }
     // Если не удалось — добиваем случайными
@@ -288,7 +290,9 @@ const CanvasStars: React.FC = () => {
         x: -MAX_STAR_SIZE + Math.random() * (CANVAS_WIDTH + 2 * MAX_STAR_SIZE),
         y: -MAX_STAR_SIZE + Math.random() * (CANVAS_HEIGHT + 2 * MAX_STAR_SIZE),
         angle: Math.random() * 360,
-        direction: Math.random() * 2 * Math.PI
+        direction: Math.random() * 2 * Math.PI,
+        speed: 60 + Math.random() * 20,
+        rotateSpeed: 3 + Math.random() * 2
       });
     }
     return stars;
@@ -318,9 +322,9 @@ const CanvasStars: React.FC = () => {
             s.direction += (avoidAngle - s.direction) * 0.01;
           }
         }
-        s.x += Math.cos(s.direction) * STAR_SPEED / 60;
-        s.y += Math.sin(s.direction) * STAR_SPEED / 60;
-        s.angle += STAR_ROTATE_SPEED / 60;
+        s.x += Math.cos(s.direction) * s.speed / 60;
+        s.y += Math.sin(s.direction) * s.speed / 60;
+        s.angle += s.rotateSpeed / 60;
         // wrap-around
         const dx = Math.cos(s.direction);
         const dy = Math.sin(s.direction);

@@ -4,7 +4,9 @@ import {
   ChangeEvent,
   useCallback,
   useEffect,
-  useState
+  useState,
+  useRef,
+  useLayoutEffect
 } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
@@ -26,22 +28,40 @@ const FontStyles = createGlobalStyle`
 `;
 
 export const Person = ({ kind, show }: { kind: string, show: boolean }) => {
-  if (!show) return null;
+  const infoRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const [barStyle, setBarStyle] = useState({ top: 0, height: 0, left: 0 });
+
+  useLayoutEffect(() => {
+    if (infoRef.current && logoRef.current) {
+      setBarStyle({
+        top: infoRef.current.offsetTop,
+        height: infoRef.current.offsetHeight,
+        left: logoRef.current.offsetLeft + logoRef.current.offsetWidth
+      });
+    }
+  }, [show]);
+
   return (
     <>
       <FontStyles />
       <PlayerWrapper>
-        <SideBar color="#E53935" />
-        <LogoBox>
-          <img src="/team.png" alt="logo" />
-        </LogoBox>
-        <InfoBox>
+        <InfoBox ref={infoRef}>
           <TopRow>
             <PlayerName>Иванов Олег 37'</PlayerName>
             <CardIcon color="#FFD600" />
           </TopRow>
           <TeamName>Атлетико</TeamName>
         </InfoBox>
+        <LogoBox ref={logoRef}>
+          <img src="/team.png" alt="logo" />
+        </LogoBox>
+        <SideBar color="#1976D2" style={{
+          position: 'absolute',
+          top: barStyle.top,
+          left: barStyle.left,
+          height: barStyle.height
+        }} />
       </PlayerWrapper>
     </>
   );
@@ -51,14 +71,17 @@ const PlayerWrapper = styled.div`
   display: flex;
   align-items: stretch;
   height: 72px;
-  min-width: 340px;
+  min-width: 300px;
   background: none;
+  z-index: 1000;
+  overflow: visible;
 `;
 
 const SideBar = styled.div<{ color: string }>`
   width: 6px;
   background: ${({ color }) => color};
-  border-radius: 2px 0 0 2px;
+  border-radius: 0 2px 2px 0;
+  z-index: 2;
 `;
 
 const LogoBox = styled.div`
@@ -68,6 +91,7 @@ const LogoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   img {
     width: 44px;
     height: 44px;
@@ -83,6 +107,7 @@ const InfoBox = styled.div`
   padding: 8px 20px 8px 20px;
   min-width: 200px;
   height: 100%;
+  position: relative;
 `;
 
 const TopRow = styled.div`

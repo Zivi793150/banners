@@ -145,13 +145,13 @@ export default function App() {
         {table_kind === 'person' && (
           <motion.div
             key={table_kind}
-            initial={{ x: -500, opacity: 0 }}
+            initial={{ x: 500, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -500, opacity: 0 }}
+            exit={{ x: 500, opacity: 0 }}
             transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
             style={{
               position: 'fixed',
-              left: 60,
+              right: 60,
               bottom: 80,
               zIndex: 20,
               pointerEvents: 'none',

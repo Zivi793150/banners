@@ -98,7 +98,7 @@ const PlayerRow = styled.div`
   gap: 40px;
 `;
 
-const Player = styled.div`
+const Player = styled.div<{ delay?: number }>`
   width: 280px;
   height: 64px;
   background: #fff;
@@ -108,6 +108,21 @@ const Player = styled.div`
   font-size: 20px;
   color: #222;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(-24px);
+  animation: fadeSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  animation-delay: ${({ delay }) => (delay ? `${delay}s` : '0s')};
+
+  @keyframes fadeSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const PlayerNumber = styled.div`
@@ -192,6 +207,9 @@ const StaffName = styled.span`
 `;
 
 const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {
+  // Для каскадной задержки
+  const playerOrder: number[] = [];
+  for (let row = 0; row < 6; row++) for (let col = 0; col < 3; col++) playerOrder.push(row * 3 + col);
   return (
     <>
       <FontStyles />
@@ -200,15 +218,18 @@ const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {
         <TeamName>{type === 'home' ? 'КОМАНДА' : 'КОМАНДА ГОСТЕЙ'}</TeamName>
         <Logo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></Logo>
         <PlayersContainer>
-          {[0,1,2,3,4,5].map((row) => (
+          {[0,1,2,3,4,5].map(row => (
             <PlayerRow key={row}>
-              {[0,1,2].map((col) => (
-                <Player key={col}>
-                  <PlayerNumber>№</PlayerNumber>
-                  <PlayerName>ИГРОК</PlayerName>
-                  <PlayerPhoto><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'cover'}} /></PlayerPhoto>
-                </Player>
-              ))}
+              {[0,1,2].map(col => {
+                const idx = row * 3 + col;
+                return (
+                  <Player key={col} delay={0.08 * idx}>
+                    <PlayerNumber>№</PlayerNumber>
+                    <PlayerName>ИГРОК</PlayerName>
+                    <PlayerPhoto><img src="/team.png" alt="logo" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></PlayerPhoto>
+                  </Player>
+                );
+              })}
             </PlayerRow>
           ))}
         </PlayersContainer>
