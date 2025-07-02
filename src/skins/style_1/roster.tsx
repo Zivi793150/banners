@@ -64,7 +64,7 @@ const Logo = styled.div`
   height: 80px;
   top: 40px;
   right: 40px;
-  background: #FFFFFF;
+  background: none;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -153,13 +153,19 @@ const PlayerName = styled.div`
 const PlayerPhoto = styled.div`
   width: 64px;
   height: 64px;
-  background: #b3d1e7;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   color: #222;
   overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 `;
 
 const BottomRow = styled.div`

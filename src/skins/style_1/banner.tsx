@@ -20,7 +20,7 @@ const BannerWrapper = styled.div`
   position: relative;
   width: 1400px;
   height: 800px;
-  background: #001134cc;
+  background: #202B48;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +47,7 @@ const Title = styled.div`
 
 const SubTitle = styled.div`
   width: 100%;
-  margin-top: 8px;
+  margin-top: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +66,7 @@ const TeamsBlock = styled.div`
   position: absolute;
   width: 1000px;
   height: 300px;
-  top: 220px;
+  top: 320px;
   left: 200px;
   display: flex;
   align-items: center;
@@ -85,7 +85,7 @@ const Team = styled.div`
 const TeamLogo = styled.div`
   width: 340px;
   height: 380px;
-  background: #fff2;
+  background: none;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -119,7 +119,7 @@ const TourBlock = styled.div`
   position: absolute;
   width: 129px;
   height: 52px;
-  top: 570px;
+  top: 670px;
   left: 636px;
   background: linear-gradient(90deg, #014069 0%, #027ECF 100%);
   border-radius: 8px;
@@ -138,15 +138,24 @@ const DateBlock = styled.div`
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  width: 190px;
+  width: 320px;
   height: 32px;
-  top: 635px;
+  top: 735px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #fff;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
-  font-size: 20px;
+  font-size: 24px;
+`;
+
+const DateDivider = styled.span`
+  display: inline-block;
+  width: 2px;
+  height: 24px;
+  background: #0094FF;
+  margin: 0 16px;
+  border-radius: 1px;
 `;
 
 // SVG-компонент звезды
@@ -406,7 +415,7 @@ const Banner: React.FC = () => {
         <TourBlock>ТУР</TourBlock>
         <DateBlock>
           <span>ДАТА</span>
-          <span>|</span>
+          <DateDivider />
           <span>ВРЕМЯ</span>
         </DateBlock>
       </BannerWrapper>

@@ -19,7 +19,7 @@ const FontStyles = createGlobalStyle`
 const Wrapper = styled.div`
   width: 1440px;
   height: 144px;
-  background: #fff;
+  background: none;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -38,7 +38,7 @@ const TeamBlock = styled.div`
 const TeamLogo = styled.div`
   width: 160px;
   height: 160px;
-  background: #e6e6e6;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;

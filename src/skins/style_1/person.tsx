@@ -87,7 +87,7 @@ const SideBar = styled.div<{ color: string }>`
 const LogoBox = styled.div`
   width: 56px;
   height: 72px;
-  background: #fff;
+  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
