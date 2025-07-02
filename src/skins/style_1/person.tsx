@@ -48,10 +48,10 @@ export const Person = ({ kind, show }: { kind: string, show: boolean }) => {
       <PlayerWrapper>
         <InfoBox ref={infoRef}>
           <TopRow>
-            <PlayerName>Иванов Олег 37'</PlayerName>
+            <PlayerName>Месси Лионель 10'</PlayerName>
             <CardIcon color="#FFD600" />
           </TopRow>
-          <TeamName>Атлетико</TeamName>
+          <TeamName>Барселона</TeamName>
         </InfoBox>
         <LogoBox ref={logoRef}>
           <img src="/team.png" alt="logo" />

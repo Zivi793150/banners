@@ -117,10 +117,11 @@ const CrossWrap = styled.div`
 
 const TourBlock = styled.div`
   position: absolute;
-  width: 129px;
+  min-width: 129px;
   height: 52px;
   top: 670px;
-  left: 636px;
+  left: 50%;
+  transform: translateX(-50%);
   background: linear-gradient(90deg, #014069 0%, #027ECF 100%);
   border-radius: 8px;
   display: flex;
@@ -130,6 +131,8 @@ const TourBlock = styled.div`
   font-weight: bold;
   font-size: 24px;
   color: #fff;
+  white-space: nowrap;
+  padding: 0 24px;
 `;
 
 const DateBlock = styled.div`
@@ -142,20 +145,19 @@ const DateBlock = styled.div`
   height: 32px;
   top: 735px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-end;
+  justify-content: center;
   color: #fff;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
-  font-size: 24px;
+  font-size: 32px;
+  line-height: 32px;
+  gap: 16px;
 `;
 
-const DateDivider = styled.span`
-  display: inline-block;
-  width: 2px;
+const DateText = styled.div`
+  display: flex;
+  align-items: flex-end;
   height: 24px;
-  background: #0094FF;
-  margin: 0 16px;
-  border-radius: 1px;
 `;
 
 // SVG-компонент звезды
@@ -415,7 +417,7 @@ const Banner: React.FC = () => {
         <TourBlock>ТУР</TourBlock>
         <DateBlock>
           <span>ДАТА</span>
-          <DateDivider />
+          <span style={{ color: '#0094FF', fontSize: 32, lineHeight: '32px', padding: '0 8px', display: 'inline-block' }}>|</span>
           <span>ВРЕМЯ</span>
         </DateBlock>
       </BannerWrapper>
