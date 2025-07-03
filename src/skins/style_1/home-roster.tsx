@@ -112,6 +112,7 @@ const Player = styled.div<{ delay?: number }>`
   transform: translateY(-24px);
   animation: fadeSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   animation-delay: ${({ delay }) => (delay ? `${delay}s` : '0s')};
+  padding: 0;
 
   @keyframes fadeSlideIn {
     0% {
@@ -138,7 +139,7 @@ const PlayerNumber = styled.div`
 
 const PlayerName = styled.div`
   flex: 1;
-  padding: 0 8px;
+  padding: 0 8px 0 0;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
   font-size: 18px;
   color: #222;
@@ -151,16 +152,15 @@ const PlayerName = styled.div`
 `;
 
 const PlayerPhoto = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 64px;
+  height: 64px;
   background: none;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: 12px;
   color: #222;
   overflow: hidden;
-  margin-left: auto;
   img {
     width: 100%;
     height: 100%;
@@ -232,7 +232,7 @@ const HomeRoster: React.FC = () => {
                   <Player key={col} delay={0.08 * idx}>
                     <PlayerNumber>№</PlayerNumber>
                     <PlayerName>ИГРОК</PlayerName>
-                    <PlayerPhoto><img src="/team.png" alt="logo" style={{width: '80%', height: '80%', objectFit: 'contain'}} /></PlayerPhoto>
+                    <PlayerPhoto><img src="/messi.jpg" alt="logo" /></PlayerPhoto>
                   </Player>
                 );
               })}
