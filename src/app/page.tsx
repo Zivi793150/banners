@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { PersonKind, TableKind, person_kinds } from '@/models';
-import Banner from '../skins/style_1/banner';
+import Mid from '../skins/style_1/mid';
 import HomeRoster from '../skins/style_1/home-roster';
 import AwayRoster from '../skins/style_1/away-roster';
-import Scoreboard from '../skins/style_1/scoreboard';
-import ScoreboardTop from '../skins/style_1/scoreboard-top';
+import Big from '../skins/style_1/big';
+import Little from '../skins/style_1/little';
 
 const styles = ['style_1', 'style_2'];
 
@@ -19,7 +19,7 @@ interface Skin {
   Replace: React.ComponentType<{ show: boolean }>;
 }
 
-const tableKinds = ['mid', 'roster', 'person', 'replace', 'off', 'scoreboard', 'scoreboard-top'];
+const tableKinds = ['mid', 'roster', 'person', 'replace', 'off', 'big', 'little'];
 
 export default function App() {
   const [style, set_style] = useState<string>('style_1');
@@ -69,7 +69,7 @@ export default function App() {
             }}
           >
             <div style={{ pointerEvents: 'auto' }}>
-              <Banner />
+              <Mid />
             </div>
           </motion.div>
         )}
@@ -123,7 +123,7 @@ export default function App() {
             </div>
           </motion.div>
         )}
-        {table_kind === 'scoreboard' && (
+        {table_kind === 'big' && (
           <motion.div
             key={table_kind}
             initial={{ y: -500, opacity: 0 }}
@@ -142,11 +142,11 @@ export default function App() {
             }}
           >
             <div style={{ pointerEvents: 'auto' }}>
-              <Scoreboard />
+              <Big />
             </div>
           </motion.div>
         )}
-        {table_kind === 'scoreboard-top' && (
+        {table_kind === 'little' && (
           <motion.div
             key={table_kind}
             initial={{ y: -500, opacity: 0 }}
@@ -164,7 +164,7 @@ export default function App() {
             }}
           >
             <div style={{ pointerEvents: 'auto' }}>
-              <ScoreboardTop />
+              <Little />
             </div>
           </motion.div>
         )}
@@ -189,8 +189,6 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* <skin.Mid show={table_kind === 'mid'} /> */}
-      {/* <skin.Person kind={person_kind} show={table_kind === 'person'} /> */}
       <skin.Replace show={table_kind === 'replace'} />
       <Tools>
         <Select value={style} onChange={(e) => set_style(e.target.value)}>
@@ -201,8 +199,8 @@ export default function App() {
         <Button onClick={() => set_table_kind('mid')}>Mid</Button>
         <Button onClick={() => set_table_kind('home-roster')}>Home roster</Button>
         <Button onClick={() => set_table_kind('away-roster')}>Away Roster</Button>
-        <Button onClick={() => set_table_kind('scoreboard')}>big</Button>
-        <Button onClick={() => set_table_kind('scoreboard-top')}>little</Button>
+        <Button onClick={() => set_table_kind('big')}>big</Button>
+        <Button onClick={() => set_table_kind('little')}>little</Button>
         <Select value={person_kind} onChange={(e) => set_person_kind(e.target.value as PersonKind)}>
           {person_kinds.map((kind) => (
             <option key={kind} value={kind}>{kind}</option>

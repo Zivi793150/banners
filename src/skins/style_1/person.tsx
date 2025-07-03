@@ -88,7 +88,7 @@ const LogoBox = styled.div`
 `;
 
 const InfoBox = styled.div`
-  background: #001134;
+  background: #001134f2;
   display: flex;
   flex-direction: column;
   justify-content: center;

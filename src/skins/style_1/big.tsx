@@ -91,7 +91,7 @@ const Score = styled.div`
 const SubText = styled.div`
   width: 100%;
   height: 44px;
-  background: #001134;
+  background: #001134f2;
   font-family: 'Supermolot-Regular', Arial, sans-serif;
   font-size: 20px;
   color: #fff;
@@ -104,7 +104,7 @@ const SubText = styled.div`
   text-overflow: ellipsis;
 `;
 
-const Scoreboard: React.FC = () => {
+const Big: React.FC = () => {
   return (
     <>
       <FontStyles />
@@ -128,4 +128,4 @@ const Scoreboard: React.FC = () => {
   );
 };
 
-export default Scoreboard; 
+export default Big; 

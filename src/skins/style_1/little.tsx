@@ -93,7 +93,7 @@ const CenterBlock = styled.div`
 const Fouls = styled.div`
   width: 80px;
   height: 16px;
-  background: #001134;
+  background: #001134f2;
   color: #fff;
   font-family: 'Supermolot-DemiBold', Arial, sans-serif;
   font-size: 12px;
@@ -124,7 +124,7 @@ const Score = styled.div`
 const BottomBlock = styled.div`
   width: 80px;
   height: 16px;
-  background: #001134;
+  background: #001134f2;
   color: #fff;
   font-family: 'Supermolot-DemiBold', Arial, sans-serif;
   font-size: 12px;
@@ -149,7 +149,7 @@ const BottomText = styled.span`
   margin: 0 8px;
 `;
 
-const ScoreboardTop: React.FC = () => {
+const Little: React.FC = () => {
   return (
     <>
       <FontStyles />
@@ -182,4 +182,4 @@ const ScoreboardTop: React.FC = () => {
   );
 };
 
-export default ScoreboardTop; 
+export default Little; 
