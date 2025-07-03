@@ -79,19 +79,27 @@ const Team = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 250px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  height: 440px;
 `;
 
 const TeamLogo = styled.div`
   width: 340px;
-  height: 420px;
   background: none;
   margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 380px;
 `;
 
 const TeamName = styled.div`
@@ -99,13 +107,18 @@ const TeamName = styled.div`
   font-weight: bold;
   font-size: 36px;
   color: #fff;
-  margin-top: 0;
+  margin-top: 24px;
   width: 100%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 10px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 `;
 
 const CrossWrap = styled.div`
@@ -408,7 +421,7 @@ const Banner: React.FC = () => {
               <line x1="100" y1="20" x2="20" y2="100" stroke="white" strokeWidth="10" strokeLinecap="round"/>
             </svg>
           </CrossWrap>
-          <Team>
+          <Team style={{ position: 'relative', top: '2px' }}>
             <TeamLogo>
               <AnimatedLogo src="/team.png" alt="logo" phase={Math.PI} />
             </TeamLogo>

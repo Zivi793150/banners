@@ -77,11 +77,13 @@ const LogoBox = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
   img {
     height: 72px;
     width: auto;
     object-fit: contain;
     max-height: 100%;
+    max-width: 100%;
   }
 `;
 
