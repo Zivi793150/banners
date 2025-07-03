@@ -65,12 +65,11 @@ const SubTitle = styled.div`
 const TeamsBlock = styled.div`
   position: absolute;
   width: 1000px;
-  height: 340px;
-  top: 320px;
-  left: 50%;
-  transform: translateX(-50%);
+  height: 300px;
+  top: 260px;
+  left: 200px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   background: transparent;
 `;
@@ -79,27 +78,19 @@ const Team = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 250px;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
-  height: 440px;
 `;
 
 const TeamLogo = styled.div`
   width: 340px;
+  height: 380px;
   background: none;
-  margin-bottom: 0;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 380px;
 `;
 
 const TeamName = styled.div`
@@ -107,18 +98,13 @@ const TeamName = styled.div`
   font-weight: bold;
   font-size: 36px;
   color: #fff;
-  margin-top: 24px;
+  margin-top: 8px;
   width: 100%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 10px;
-  margin-bottom: 0;
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  bottom: 0;
 `;
 
 const CrossWrap = styled.div`
@@ -421,7 +407,7 @@ const Banner: React.FC = () => {
               <line x1="100" y1="20" x2="20" y2="100" stroke="white" strokeWidth="10" strokeLinecap="round"/>
             </svg>
           </CrossWrap>
-          <Team style={{ position: 'relative', top: '2px' }}>
+          <Team>
             <TeamLogo>
               <AnimatedLogo src="/team.png" alt="logo" phase={Math.PI} />
             </TeamLogo>
