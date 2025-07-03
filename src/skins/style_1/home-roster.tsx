@@ -55,15 +55,15 @@ const TeamName = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 120px;
+  padding: 0 20px;
 `;
 
 const Logo = styled.div`
   position: absolute;
-  width: 80px;
-  height: 80px;
-  top: 40px;
-  right: 40px;
+  width: 240px;
+  height: 240px;
+  top: -20px;
+  right: 24px;
   background: none;
   border-radius: 8px;
   display: flex;
@@ -72,8 +72,8 @@ const Logo = styled.div`
   overflow: hidden;
   
   img {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 `;
@@ -87,7 +87,7 @@ const PlayersContainer = styled.div`
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 `;
 
 const PlayerRow = styled.div`
@@ -95,7 +95,7 @@ const PlayerRow = styled.div`
   height: 64px;
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 8px;
 `;
 
 const Player = styled.div<{ delay?: number }>`
@@ -212,8 +212,7 @@ const StaffName = styled.span`
   flex: 1;
 `;
 
-const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {
-  // Для каскадной задержки
+const HomeRoster: React.FC = () => {
   const playerOrder: number[] = [];
   for (let row = 0; row < 6; row++) for (let col = 0; col < 3; col++) playerOrder.push(row * 3 + col);
   return (
@@ -221,7 +220,7 @@ const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {
       <FontStyles />
       <Wrapper>
         <RosterBadge>СОСТАВ</RosterBadge>
-        <TeamName>{type === 'home' ? 'КОМАНДА' : 'КОМАНДА ГОСТЕЙ'}</TeamName>
+        <TeamName>КОМАНДА ДОМА</TeamName>
         <Logo><img src="/team.png" alt="logo" style={{width: '100%', height: '100%', objectFit: 'contain'}} /></Logo>
         <PlayersContainer>
           {[0,1,2,3,4,5].map(row => (
@@ -248,4 +247,4 @@ const Roster: React.FC<{ type?: 'home' | 'away' }> = ({ type = 'home' }) => {
   );
 };
 
-export default Roster; 
+export default HomeRoster; 

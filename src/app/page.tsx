@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { PersonKind, TableKind, person_kinds } from '@/models';
 import Banner from '../skins/style_1/banner';
-import Roster from '../skins/style_1/roster';
+import HomeRoster from '../skins/style_1/home-roster';
+import AwayRoster from '../skins/style_1/away-roster';
 import Scoreboard from '../skins/style_1/scoreboard';
 import ScoreboardTop from '../skins/style_1/scoreboard-top';
 
@@ -72,7 +73,7 @@ export default function App() {
             </div>
           </motion.div>
         )}
-        {(table_kind === 'home-roster' || table_kind === 'away-roster') && (
+        {(table_kind === 'home-roster') && (
           <motion.div
             key={table_kind}
             initial={{ y: -500, opacity: 0 }}
@@ -93,7 +94,32 @@ export default function App() {
             }}
           >
             <div style={{ pointerEvents: 'auto' }}>
-              <Roster type={table_kind === 'home-roster' ? 'home' : 'away'} />
+              <HomeRoster />
+            </div>
+          </motion.div>
+        )}
+        {(table_kind === 'away-roster') && (
+          <motion.div
+            key={table_kind}
+            initial={{ y: -500, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 500, opacity: 0 }}
+            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10,
+              pointerEvents: 'none',
+            }}
+          >
+            <div style={{ pointerEvents: 'auto' }}>
+              <AwayRoster />
             </div>
           </motion.div>
         )}
