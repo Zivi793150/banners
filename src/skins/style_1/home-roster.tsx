@@ -151,8 +151,8 @@ const PlayerName = styled.div`
 `;
 
 const PlayerPhoto = styled.div`
-  width: 64px;
-  height: 64px;
+  width: 120px;
+  height: 120px;
   background: none;
   display: flex;
   align-items: center;
@@ -160,6 +160,7 @@ const PlayerPhoto = styled.div`
   font-size: 12px;
   color: #222;
   overflow: hidden;
+  margin-left: auto;
   img {
     width: 100%;
     height: 100%;
