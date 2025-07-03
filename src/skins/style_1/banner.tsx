@@ -65,11 +65,12 @@ const SubTitle = styled.div`
 const TeamsBlock = styled.div`
   position: absolute;
   width: 1000px;
-  height: 300px;
+  height: 340px;
   top: 320px;
-  left: 200px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   background: transparent;
 `;
@@ -84,9 +85,9 @@ const Team = styled.div`
 
 const TeamLogo = styled.div`
   width: 340px;
-  height: 380px;
+  height: 420px;
   background: none;
-  margin-bottom: 12px;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +99,7 @@ const TeamName = styled.div`
   font-weight: bold;
   font-size: 36px;
   color: #fff;
-  margin-top: 8px;
+  margin-top: 0;
   width: 100%;
   text-align: center;
   white-space: nowrap;
